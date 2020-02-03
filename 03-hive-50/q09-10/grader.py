@@ -1,16 +1,25 @@
 
+##! /usr/local/bin/python3
 r"""Test cases
 >>> run_answer() # doctest: +NORMALIZE_WHITESPACE
-1,D,3
-2,C,0
-3,D,1
-4,D,5
-5,C,2
-6,A,4
-7,B,5
-8,C,5
-9,B,4
-10,B,3
+Vivian@Hamilton
+Karen@Holcomb
+Cody@Garrett
+Roth@Fry
+Zoe@Conway
+Gretchen@Kinney
+Driscoll@Klein
+Karyn@Diaz
+Merritt@Guy
+Kylan@Sexton
+Jordan@Estes
+Hope@Coffey
+Vivian@Crane
+Clio@Noel
+Hope@Silva
+Ayanna@Jarvis
+Chanda@Boyer
+Chadwick@Knight
 <BLANKLINE>
 
 """
@@ -23,8 +32,8 @@ def run_answer():
     #----------------------------------------------------------------------------------------------
     # Ejecuta el código del estudiante
     #----------------------------------------------------------------------------------------------
-    result = os.popen('hive -S -e "source question.hql"').read()
-    result = os.popen('cat output/*').read()
+    result = os.popen("pig -execute 'run question.pig'").read()
+    result = os.popen("cat output/*").read()
     print(result)
 
 #--------------------------------------------------------------------------------------------------

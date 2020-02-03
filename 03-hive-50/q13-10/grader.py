@@ -2,13 +2,11 @@
 ##! /usr/local/bin/python3
 r"""Test cases
 >>> run_answer() # doctest: +NORMALIZE_WHITESPACE
-a   22
-b   12
-c   17
-d   13
-e   15
-f   25
-g   9
+black
+blue
+blue
+black
+blue
 <BLANKLINE>
 
 """

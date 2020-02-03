@@ -1,16 +1,17 @@
 
+##! /usr/local/bin/python3
 r"""Test cases
 >>> run_answer() # doctest: +NORMALIZE_WHITESPACE
-A:E:C:D
-A:C
-B:D
-A:C:E:B:D
-D:E:C
-A:D
-A:E:D
-D:A:C:E
-B:A:C:E
-C:D:E:A:B
+aaa,13
+bbb,16
+ccc,23
+ddd,23
+eee,15
+fff,20
+ggg,13
+hhh,16
+iii,18
+jjj,18
 <BLANKLINE>
 
 """
@@ -23,8 +24,8 @@ def run_answer():
     #----------------------------------------------------------------------------------------------
     # Ejecuta el código del estudiante
     #----------------------------------------------------------------------------------------------
-    result = os.popen('hive -S -e "source question.hql"').read()
-    result = os.popen('cat output/*').read()
+    result = os.popen("pig -execute 'run question.pig'").read()
+    result = os.popen("cat output/*").read()
     print(result)
 
 #--------------------------------------------------------------------------------------------------

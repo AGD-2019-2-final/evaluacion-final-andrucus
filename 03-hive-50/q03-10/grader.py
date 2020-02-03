@@ -1,11 +1,12 @@
 
+##! /usr/local/bin/python3
 r"""Test cases
 >>> run_answer() # doctest: +NORMALIZE_WHITESPACE
+1
+2
+3
+4
 5
-6
-7
-10
-11
 <BLANKLINE>
 
 """
@@ -18,8 +19,8 @@ def run_answer():
     #----------------------------------------------------------------------------------------------
     # Ejecuta el código del estudiante
     #----------------------------------------------------------------------------------------------
-    result = os.popen('hive -S -e "source question.hql"').read()
-    result = os.popen('cat output/*').read()
+    result = os.popen("pig -execute 'run question.pig'").read()
+    result = os.popen("cat output/*").read()
     print(result)
 
 #--------------------------------------------------------------------------------------------------
