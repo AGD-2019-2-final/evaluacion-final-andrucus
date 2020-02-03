@@ -1,0 +1,73 @@
+cd analitica_datos_masivos
+
+vagrant up
+
+vagrant ssh
+
+cd /vagrant
+
+docker run --rm -it -v "$PWD":/datalake  --name pig -p 50070:50070 -p 8088:8088 -p 8888:8888 -p 5000:5000 jdvelasq/pig:0.17.0-pseudo
+
+pig
+
+#################### esto si quiero correrlo en cmd paso a paso ########################
+fs -rm -f -r output
+--
+-- >>> Escriba su respuesta a partir de este punto <<<
+--
+fs -rm -f -r data.tsv
+fs -put data.tsv
+u = LOAD 'data.tsv' USING PigStorage('\t')
+    AS (letra:CHARARRAY,
+        fecha:DATETIME,
+        valor:INT);
+gr = GROUP u BY letra;
+f = FOREACH gr GENERATE FLATTEN(group) as (letra), COUNT($1);
+DUMP f;
+STORE f INTO 'output';
+fs -copyToLocal output output;
+
+
+################################## si deseo correrlo de corrido ####################################
+abro otro cmd 
+
+cd analitica_datos_masivos
+
+vagrant up
+
+vagrant ssh
+
+cd /vagrant
+
+nano script.pig
+
+##en la interfaz de nano pego todo el código##
+
+
+##inicio codigo#########################################################
+fs -rm -f -r output
+--
+-- >>> Escriba su respuesta a partir de este punto <<<
+--
+fs -rm -f -r data.tsv
+fs -put data.tsv
+u = LOAD 'data.tsv' USING PigStorage('\t')
+    AS (letra:CHARARRAY,
+        fecha:DATETIME,
+        valor:INT);
+gr = GROUP u BY letra;
+f = FOREACH gr GENERATE FLATTEN(group) as (letra), COUNT($1);
+DUMP f;
+STORE f INTO 'output';
+fs -copyToLocal output output;
+###fin codigo###########################################################
+
+
+###para salir del nano (  Ctrl + s  (para guardar) y Ctrl + X   (para salir) )############
+
+########## aquí debo volver abrir el cmd donde ejecute : docker run --rm -it -v "$PWD":/datalake  --name pig -p 50070:50070 -p 8088:8088 -p 8888:8888 -p 5000:5000 jdvelasq/pig:0.17.0-pseudo ########
+
+run script.pig
+
+
+fin...........
